@@ -1,0 +1,29 @@
+---
+description: 
+globs: 
+alwaysApply: true
+---
+## 프로젝트 요약: 지섭의 포트폴리오 (JISUB's Portfolio) - Cursor 개발용
+
+* **프로젝트 이름:** 지섭의 포트폴리오 (JISUB's Portfolio) [cite: 6]
+* **핵심 목적 및 가치 제안:** 개발자 지섭의 프로젝트 경험과 기술 역량을 전문적으로 전시하여 잠재적 고용주, 클라이언트, 동료들에게 효과적으로 어필하고 새로운 기회를 창출하는 개인 포트폴리오 웹사이트입니다. [cite: 10, 11, 12, 13] 맞춤형 스토리텔링과 뛰어난 UX를 통해 차별화된 경험을 제공합니다.
+* **타겟 고객:**
+    * 잠재적 고용주/채용 담당자: 기술 스택, 프로젝트 경험, 문제 해결 능력 확인 희망. [cite: 19]
+    * 잠재적 클라이언트/협력 파트너: 신뢰성, 전문성, 유사 프로젝트 경험 확인 희망. [cite: 19]
+    * 동료 개발자 및 업계 관계자: 기술 교류, 네트워킹 목적. [cite: 19]
+* **주요 기능 (MVP 중점):**
+    * 프로젝트 쇼케이스: 상세 설명, 시각 자료, 기술, 데모/GitHub 링크 제공. [cite: 24, 25]
+    * 기술 스택 소개: 카테고리별 기술 목록 (아이콘, 이름). [cite: 24]
+    * 자기소개 (About Me): 프로필, 소개 글, 경력, 학력. [cite: 24]
+    * 연락처 (Contact): 이메일, 소셜 링크, 문의 양식. [cite: 24]
+    * 반응형 웹 디자인. [cite: 24]
+* **기술 스택 요약:** [cite: 34, 35, 36, 401, 402]
+    * 프론트엔드: Next.js, TypeScript, shadcn/ui, Tailwind CSS, Framer Motion
+    * 백엔드/데이터베이스: Supabase (PostgreSQL, Storage, Edge Functions)
+    * 배포: Vercel
+* **전반적인 룩앤필:** 모던, 미니멀리스트, 전문적, 깔끔함. 콘텐츠 중심. [cite: 39, 406]
+* **기본 색상 (제안):**
+    * 라이트 모드: Primary (Slate 900), Secondary (Slate 500), Accent (Blue 500), Background (White/Slate 50) [cite: 40, 407]
+    * 다크 모드: Primary (Slate 100), Secondary (Slate 400), Accent (Blue 500), Background (Slate 900/Black) [cite: 40, 407]
+
+* **주요 UX 원칙:** 직관성, 일관성, 피드백 제공, 접근성, 효율성, 가독성. [cite: 45, 412]
