@@ -1,9 +1,4 @@
-import Link from "next/link";
-import { Button } from "@/components/ui/button";
-import SectionTitle from "@/components/ui/SectionTitle";
-import ProjectList from "@/components/ProjectList";
 import { createClient } from "@/lib/server";
-import AnimatedSection from "@/components/home/AnimatedSection";
 import HeroSection from "@/components/home/HeroSection";
 import FeaturedProjects from "@/components/home/FeaturedProjects";
 import AboutPreview from "@/components/home/AboutPreview";

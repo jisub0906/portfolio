@@ -74,7 +74,7 @@ export default async function ProjectsPage() {
 
   return (
     <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-12 flex flex-col items-center">
-      <SectionTitle title="모든 프로젝트" />
+      <SectionTitle title="Projects" />
       <ProjectsFilterSection projects={projects} techStackNames={techStackNames} />
     </div>
   );

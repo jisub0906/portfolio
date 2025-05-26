@@ -50,14 +50,14 @@ const ProjectsFilterSection: React.FC<ProjectsFilterSectionProps> = ({ projects,
           placeholder="프로젝트 제목 검색..."
           value={search}
           onChange={(e) => setSearch(e.target.value)}
-          className="md:w-64 w-full rounded-lg border-slate-200 dark:border-slate-700 focus:ring-blue-500"
+          className="md:w-64 w-full h-12 px-4 py-3 rounded-lg border border-slate-200 dark:border-slate-700 text-base focus:ring-blue-500"
         />
-        <div className="relative md:w-80 w-full">
+        <div className="relative md:w-64 w-full">
           <Popover>
             <PopoverTrigger asChild>
               <button
                 type="button"
-                className="w-full min-w-[180px] border border-slate-200 dark:border-slate-700 rounded-lg px-3 py-2 text-left bg-background hover:bg-accent transition-colors focus:outline-none focus:ring-2 focus:ring-blue-500"
+                className="w-full h-12 px-4 py-3 rounded-lg border border-slate-200 dark:border-slate-700 text-base flex items-center bg-background hover:bg-accent transition-colors focus:outline-none focus:ring-2 focus:ring-blue-500"
               >
                 {selectedTechs.length > 0 ? (
                   <span className="flex flex-wrap gap-1">

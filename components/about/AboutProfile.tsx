@@ -26,16 +26,16 @@ const AboutProfile: React.FC<AboutProfileProps> = ({ profileImageUrl, name, intr
           />
         </div>
       </div>
-      <div className="flex-1 flex flex-col justify-center items-center lg:items-start text-center lg:text-left px-2">
+      <div className="flex-1 flex flex-col justify-center items-start text-left px-2">
         <h1 className="text-3xl font-bold text-slate-900 dark:text-slate-100 mb-3">{name}</h1>
         {Array.isArray(introduction)
           ? introduction.map((para, idx) => (
-              <p key={idx} className="mb-3 text-lg text-slate-700 dark:text-slate-300">
+              <p key={idx} className="mb-1 text-lg text-slate-700 dark:text-slate-300">
                 {para}
               </p>
             ))
           : (
-              <p className="mb-3 text-lg text-slate-700 dark:text-slate-300">{introduction}</p>
+              <p className="mb-1 text-lg text-slate-700 dark:text-slate-300">{introduction}</p>
             )}
         {resumeUrl && (
           <a href={resumeUrl} target="_blank" rel="noopener noreferrer">

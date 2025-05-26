@@ -2,8 +2,8 @@ import React from "react";
 import { Button } from "@/components/ui/button";
 import { Github, Linkedin } from "lucide-react";
 
-const GITHUB_URL = "https://github.com/jisub-lee"; // 실제 주소로 교체
-const LINKEDIN_URL = "https://linkedin.com/in/jisub-lee"; // 실제 주소로 교체
+const GITHUB_URL = "https://github.com/jisub0906"; // 실제 주소로 교체
+const LINKEDIN_URL = "https://www.linkedin.com/in/jisub-lee-283093284/"; // 실제 주소로 교체
 
 const Footer: React.FC = () => {
   return (

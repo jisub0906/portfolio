@@ -18,7 +18,6 @@ export default function TechStackPreview({ skills }: TechStackPreviewProps) {
       <div className="max-w-3xl mx-auto flex flex-col items-center">
         <SectionTitle
           title="핵심 기술"
-          subtitle="제가 주로 사용하는 기술들입니다."
         />
         <div className="mt-10 flex flex-wrap justify-center gap-8 w-full">
           {skills.map((skill) => (

@@ -9,7 +9,6 @@ export default function ContactPreview() {
       <div className="max-w-2xl mx-auto flex flex-col items-center">
         <SectionTitle
           title="함께 일하고 싶으신가요?"
-          subtitle="언제든지 편하게 연락주세요."
         />
         <p className="mt-8 text-lg text-muted-foreground text-center">
           새로운 프로젝트, 협업 기회, 또는 커피 한 잔의 대화도 환영합니다.
