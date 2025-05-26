@@ -6,9 +6,9 @@ import { Button } from "@/components/ui/button";
 import { Github, Linkedin, Mail } from "lucide-react";
 import { motion } from "framer-motion";
 
-const EMAIL = "jisub@example.com"; // 실제 이메일로 교체
-const GITHUB_URL = "https://github.com/jisub-lee";
-const LINKEDIN_URL = "https://linkedin.com/in/jisub-lee";
+const EMAIL = "jisub0906@gmail.com"; // 실제 이메일로 교체
+const GITHUB_URL = "https://github.com/jisub0906";
+const LINKEDIN_URL = "https://www.linkedin.com/in/jisub-lee-283093284/";
 
 export default function ContactAnimatedColumns() {
   return (

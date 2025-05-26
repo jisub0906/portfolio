@@ -6,7 +6,7 @@ import { createClient } from "@/lib/server";
 export default async function SkillsPage() {
   const supabase = await createClient();
   // tech_stack 테이블에서 category, name, icon_url 조회
-  const { data, error } = await supabase
+  const { data } = await supabase
     .from("tech_stack")
     .select("category, name, icon_url")
     .order("category", { ascending: true })

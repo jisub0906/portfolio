@@ -49,14 +49,15 @@ export default async function Home() {
     }));
   }
 
-  // 주요 기술 아이콘 및 라벨 정보
-  const skills = [
-    { name: "Next.js", icon: "/icons/nextjs.svg" },
-    { name: "React", icon: "/icons/react.svg" },
-    { name: "TypeScript", icon: "/icons/typescript.svg" },
-    { name: "Supabase", icon: "/icons/supabase.svg" },
-    { name: "Tailwind CSS", icon: "/icons/tailwindcss.svg" },
-  ];
+  // 주요 기술 아이콘 및 라벨 정보 (DB에서 동적으로 가져오기)
+  const { data: skillsData } = await supabase
+    .from("tech_stack")
+    .select("name, icon_url")
+    .limit(5);
+
+  const skills = Array.isArray(skillsData)
+    ? skillsData.map((s) => ({ name: s.name, icon: s.icon_url }))
+    : [];
 
   return (
     <main>

@@ -1,13 +1,6 @@
 import SectionTitle from "@/components/ui/SectionTitle";
-import ProjectList from "@/components/ProjectList";
 import { createClient } from "@/lib/server";
-import {
-  Select,
-  SelectTrigger,
-  SelectValue,
-  SelectContent,
-  SelectItem,
-} from "@/components/ui/select";
+import ProjectsFilterSection from "@/components/projects/ProjectsFilterSection";
 
 // Project type for type safety
 interface Project {
@@ -56,38 +49,33 @@ const getProjects = async (): Promise<Project[]> => {
   }));
 };
 
+const getAllTechStackNames = async (): Promise<string[]> => {
+  const supabase = await createClient();
+  const { data, error } = await supabase
+    .from("tech_stack")
+    .select("name")
+    .order("name", { ascending: true });
+  if (error) return [];
+  return (data ?? []).map((item: any) => item.name);
+};
+
 export default async function ProjectsPage() {
   let projects: Project[] = [];
+  let techStackNames: string[] = [];
   try {
-    projects = await getProjects();
+    [projects, techStackNames] = await Promise.all([
+      getProjects(),
+      getAllTechStackNames(),
+    ]);
   } catch (e) {
-    // Optionally log error
     projects = [];
+    techStackNames = [];
   }
 
   return (
     <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-12 flex flex-col items-center">
       <SectionTitle title="모든 프로젝트" />
-      <div className="w-full flex flex-col sm:flex-row sm:items-center sm:justify-between mt-8 mb-8 gap-4">
-        <label className="block text-sm font-medium text-slate-700 dark:text-slate-200 mb-2 sm:mb-0">
-          기술 스택 필터
-        </label>
-        <Select>
-          <SelectTrigger className="w-48">
-            <SelectValue placeholder="전체" />
-          </SelectTrigger>
-          <SelectContent>
-            <SelectItem value="all">전체</SelectItem>
-            {/* 실제 옵션은 추후 동적으로 생성 */}
-            <SelectItem value="react">React</SelectItem>
-            <SelectItem value="nextjs">Next.js</SelectItem>
-            <SelectItem value="typescript">TypeScript</SelectItem>
-          </SelectContent>
-        </Select>
-      </div>
-      <div className="w-full">
-        <ProjectList projects={projects} />
-      </div>
+      <ProjectsFilterSection projects={projects} techStackNames={techStackNames} />
     </div>
   );
 } 
