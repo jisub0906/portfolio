@@ -25,31 +25,31 @@ const ProjectCard: React.FC<ProjectCardProps> = ({ project }) => {
   return (
     <Link href={`/projects/${project.slug}`} className="block group focus:outline-none">
       <motion.div
-        whileHover={{ y: -5, boxShadow: "0px 10px 15px -3px rgba(0,0,0,0.1), 0px 4px 6px -2px rgba(0,0,0,0.05)" }}
-        transition={{ type: "spring", stiffness: 300, damping: 20 }}
+        whileHover={{ y: -4, boxShadow: "0px 6px 18px -6px rgba(30,41,59,0.10)" }}
+        transition={{ type: "spring", stiffness: 250, damping: 22 }}
       >
-        <Card className="transition-shadow hover:shadow-lg focus:ring-2 focus:ring-blue-500">
-          <AspectRatio ratio={16 / 9}>
+        <Card className="transition-shadow hover:shadow-md border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-900">
+          <AspectRatio ratio={16 / 9} className="overflow-hidden rounded-t-xl">
             <Image
               src={project.thumbnail_url}
               alt={project.title}
               fill
-              className="object-cover rounded-t-md group-hover:scale-105 transition-transform duration-300"
+              className="object-cover group-hover:scale-105 transition-transform duration-300 rounded-t-xl"
               sizes="(max-width: 768px) 100vw, 50vw"
               priority={false}
             />
           </AspectRatio>
           <CardContent className="pt-4 pb-2">
-            <CardTitle className="text-xl font-semibold mb-1 truncate">
+            <CardTitle className="text-lg font-semibold mb-1 truncate text-slate-900 dark:text-slate-100">
               {project.title}
             </CardTitle>
-            <p className="text-muted-foreground text-sm line-clamp-2">
+            <p className="text-muted-foreground text-sm line-clamp-2 min-h-[2.5em]">
               {project.summary}
             </p>
           </CardContent>
           <CardFooter className="flex flex-wrap gap-2 pt-2 pb-4">
             {project.tech_stack.map((tech) => (
-              <Badge key={tech} variant="secondary" className="text-xs px-2 py-1">
+              <Badge key={tech} variant="secondary" className="text-xs px-2 py-1 bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-200 border border-slate-200 dark:border-slate-700">
                 {tech}
               </Badge>
             ))}

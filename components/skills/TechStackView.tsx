@@ -1,12 +1,7 @@
 'use client';
 
 import React from "react";
-import Image from "next/image";
-import { Card, CardContent } from "@/components/ui/card";
-import { Avatar, AvatarFallback } from "@/components/ui/avatar";
-import { Star } from "lucide-react";
-import { motion } from "framer-motion";
-import { Tooltip, TooltipTrigger, TooltipContent } from "@/components/ui/tooltip";
+import TechStackCard from "./TechStackCard";
 
 export type TechStackCategory = {
   category: string;
@@ -23,60 +18,18 @@ interface TechStackViewProps {
 
 const TechStackView: React.FC<TechStackViewProps> = ({ techStackData }) => {
   return (
-    <div className="space-y-10">
+    <div className="space-y-12">
       {techStackData.map(({ category, skills }) => (
         <section key={category}>
-          <h3 className="text-2xl font-semibold mb-4">{category}</h3>
-          <div className="grid grid-cols-3 sm:grid-cols-4 md:grid-cols-5 lg:grid-cols-6 gap-4">
+          <div className="mb-6">
+            <h3 className="text-2xl md:text-3xl font-bold text-slate-900 dark:text-slate-100 flex items-center gap-2">
+              {category}
+              <span className="h-0.5 w-8 bg-blue-500 rounded ml-2" />
+            </h3>
+          </div>
+          <div className="grid grid-cols-3 sm:grid-cols-4 md:grid-cols-5 lg:grid-cols-6 gap-5 md:gap-6">
             {skills.map((skill) => (
-              <Tooltip key={skill.name}>
-                <TooltipTrigger asChild>
-                  <motion.div
-                    whileHover={{ y: -8, scale: 1.03 }}
-                    transition={{ type: "spring", stiffness: 300, damping: 20 }}
-                  >
-                    <Card className="p-4 flex flex-col items-center justify-center transition-shadow hover:shadow-lg cursor-pointer">
-                      <CardContent className="flex flex-col items-center justify-center">
-                        {skill.icon_url ? (
-                          <Image
-                            src={skill.icon_url}
-                            alt={skill.name}
-                            width={48}
-                            height={48}
-                            className="object-contain w-12 h-12 rounded-full"
-                          />
-                        ) : (
-                          <Avatar className="w-12 h-12 mb-0">
-                            <AvatarFallback className="text-3xl font-bold">
-                              {skill.name.charAt(0).toUpperCase()}
-                            </AvatarFallback>
-                          </Avatar>
-                        )}
-                        <p className="text-sm text-center mt-2">{skill.name}</p>
-                        {typeof skill.proficiency === "number" && (
-                          <div className="flex items-center justify-center mt-1">
-                            {[1, 2, 3, 4, 5].map((level) => (
-                              <Star
-                                key={level}
-                                size={14}
-                                className={
-                                  level <= (skill.proficiency ?? 0)
-                                    ? "text-yellow-400 fill-yellow-400"
-                                    : "text-muted-foreground"
-                                }
-                                fill={level <= (skill.proficiency ?? 0) ? "currentColor" : "none"}
-                              />
-                            ))}
-                          </div>
-                        )}
-                      </CardContent>
-                    </Card>
-                  </motion.div>
-                </TooltipTrigger>
-                <TooltipContent side="top" align="center">
-                  {skill.name}
-                </TooltipContent>
-              </Tooltip>
+              <TechStackCard key={skill.name} skill={skill} />
             ))}
           </div>
         </section>

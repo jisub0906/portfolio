@@ -43,28 +43,28 @@ const ProjectsFilterSection: React.FC<ProjectsFilterSectionProps> = ({ projects,
   };
 
   return (
-    <div className="w-full flex flex-col gap-6 mt-8 mb-8">
+    <div className="w-full flex flex-col gap-8 mt-8 mb-8">
       <div className="flex flex-col md:flex-row md:items-center md:gap-6 gap-4">
         <Input
           type="text"
           placeholder="프로젝트 제목 검색..."
           value={search}
           onChange={(e) => setSearch(e.target.value)}
-          className="md:w-64 w-full"
+          className="md:w-64 w-full rounded-lg border-slate-200 dark:border-slate-700 focus:ring-blue-500"
         />
         <div className="relative md:w-80 w-full">
           <Popover>
             <PopoverTrigger asChild>
               <button
                 type="button"
-                className="w-full min-w-[180px] border rounded px-3 py-2 text-left bg-background hover:bg-accent transition-colors"
+                className="w-full min-w-[180px] border border-slate-200 dark:border-slate-700 rounded-lg px-3 py-2 text-left bg-background hover:bg-accent transition-colors focus:outline-none focus:ring-2 focus:ring-blue-500"
               >
                 {selectedTechs.length > 0 ? (
                   <span className="flex flex-wrap gap-1">
                     {selectedTechs.map((tech) => (
                       <span
                         key={tech}
-                        className="inline-flex items-center bg-blue-100 text-blue-800 dark:bg-blue-900 dark:text-blue-100 rounded px-2 py-0.5 text-xs font-medium"
+                        className="inline-flex items-center bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-200 border border-slate-200 dark:border-slate-700 rounded px-2 py-0.5 text-xs font-medium"
                       >
                         {tech}
                         <span
@@ -85,15 +85,16 @@ const ProjectsFilterSection: React.FC<ProjectsFilterSectionProps> = ({ projects,
                 )}
               </button>
             </PopoverTrigger>
-            <PopoverContent className="w-64">
+            <PopoverContent className="w-64 rounded-lg border-slate-200 dark:border-slate-700">
               <div className="flex flex-col gap-2 max-h-60 overflow-y-auto">
                 {techStackNames.map((tech) => (
                   <label key={tech} className="flex items-center gap-2 cursor-pointer px-2 py-1 rounded hover:bg-accent">
                     <Checkbox
                       checked={selectedTechs.includes(tech)}
                       onCheckedChange={() => toggleTech(tech)}
+                      className="border-slate-300 dark:border-slate-600"
                     />
-                    <span>{tech}</span>
+                    <span className="text-sm">{tech}</span>
                   </label>
                 ))}
               </div>

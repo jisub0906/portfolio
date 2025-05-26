@@ -2,13 +2,9 @@
 
 import React from "react";
 import ContactForm from "@/components/contact/ContactForm";
-import { Button } from "@/components/ui/button";
-import { Github, Linkedin, Mail } from "lucide-react";
+import ContactInfo from "@/components/contact/ContactInfo";
+import ContactSocialLinks from "@/components/contact/ContactSocialLinks";
 import { motion } from "framer-motion";
-
-const EMAIL = "jisub0906@gmail.com"; // 실제 이메일로 교체
-const GITHUB_URL = "https://github.com/jisub0906";
-const LINKEDIN_URL = "https://www.linkedin.com/in/jisub-lee-283093284/";
 
 export default function ContactAnimatedColumns() {
   return (
@@ -20,33 +16,8 @@ export default function ContactAnimatedColumns() {
         animate={{ opacity: 1, x: 0 }}
         transition={{ duration: 0.6, ease: "easeOut" }}
       >
-        <p className="text-base text-muted-foreground">
-          프로젝트 문의, 협업 제안, 또는 커피챗도 환영합니다.
-        </p>
-        <div className="flex flex-col gap-3">
-          <div className="flex items-center gap-2">
-            <Mail className="w-5 h-5 text-primary" />
-            <a
-              href={`mailto:${EMAIL}`}
-              className="text-primary font-medium hover:underline"
-              aria-label="이메일 보내기"
-            >
-              {EMAIL}
-            </a>
-          </div>
-          <div className="flex flex-row items-center gap-2 mt-2">
-            <Button asChild variant="outline" size="icon" aria-label="GitHub">
-              <a href={GITHUB_URL} target="_blank" rel="noopener noreferrer">
-                <Github className="w-5 h-5" />
-              </a>
-            </Button>
-            <Button asChild variant="outline" size="icon" aria-label="LinkedIn">
-              <a href={LINKEDIN_URL} target="_blank" rel="noopener noreferrer">
-                <Linkedin className="w-5 h-5" />
-              </a>
-            </Button>
-          </div>
-        </div>
+        <ContactInfo />
+        <ContactSocialLinks className="mt-2" />
       </motion.div>
       {/* 오른쪽: ContactForm */}
       <motion.div
