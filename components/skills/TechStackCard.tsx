@@ -28,7 +28,7 @@ const TechStackCard: React.FC<{ skill: Skill }> = ({ skill }) => {
                   alt={skill.name}
                   width={48}
                   height={48}
-                  className="object-contain w-12 h-12 rounded-full"
+                  className="object-contain w-12 h-12 rounded-full dark:invert"
                 />
               ) : (
                 <Avatar className="w-12 h-12 mb-0">

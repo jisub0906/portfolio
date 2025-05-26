@@ -29,7 +29,7 @@ export default function TechStackPreview({ skills }: TechStackPreviewProps) {
                   alt={skill.name}
                   width={48}
                   height={48}
-                  className="mb-2"
+                  className="mb-2 dark:invert"
                 />
               ) : (
                 <div className="w-12 h-12 flex items-center justify-center bg-slate-200 rounded mb-2 text-xs text-slate-500">
