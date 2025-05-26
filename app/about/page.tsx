@@ -2,7 +2,7 @@ import AboutPageClient from "../../components/about/AboutPageClient";
 import { Experience, Education } from "@/components/about/AboutMeView";
 
 const aboutMeData = {
-  profileImageUrl: "/images/profile.jpg",
+  profileImageUrl: "/images/profile.png",
   name: "지섭",
   introduction: [
     "안녕하세요! 저는 프론트엔드와 백엔드 모두에 관심이 많은 풀스택 개발자 지섭입니다.",

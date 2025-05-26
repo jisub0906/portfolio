@@ -58,6 +58,7 @@ const AboutMeView: React.FC<AboutMeViewProps> = ({
               src={profileImageUrl}
               alt={name}
               fill
+              sizes="(max-width: 1024px) 160px, 160px"
               className="rounded-full object-cover border-2 border-slate-200 dark:border-slate-700 shadow"
               priority
             />
