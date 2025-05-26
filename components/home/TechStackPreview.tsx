@@ -2,6 +2,7 @@ import Link from "next/link";
 import { Button } from "@/components/ui/button";
 import SectionTitle from "@/components/ui/SectionTitle";
 import AnimatedSection from "./AnimatedSection";
+import Image from "next/image";
 
 interface Skill {
   name: string;
@@ -23,7 +24,7 @@ export default function TechStackPreview({ skills }: TechStackPreviewProps) {
           {skills.map((skill) => (
             <div key={skill.name} className="flex flex-col items-center w-24">
               {skill.icon ? (
-                <img
+                <Image
                   src={skill.icon}
                   alt={skill.name}
                   width={48}

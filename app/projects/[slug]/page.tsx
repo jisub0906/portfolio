@@ -6,19 +6,16 @@ import Link from "next/link";
 import { Button } from "@/components/ui/button";
 import { ArrowLeft } from "lucide-react";
 
-interface ProjectPageProps {
-  params: { slug: string };
-}
-
 export const revalidate = 60; // ISR: 1분마다 갱신
 
-export async function generateMetadata({ params }: ProjectPageProps): Promise<Metadata> {
+export async function generateMetadata({ params }: { params?: Promise<{ slug: string }> }): Promise<Metadata> {
   // (선택) SEO 개선을 위한 메타데이터 동적 생성
   const supabase = await createClient();
+  const resolvedParams = params ? await params : { slug: "" };
   const { data: project } = await supabase
     .from("projects")
     .select("title, description")
-    .eq("slug", params.slug)
+    .eq("slug", resolvedParams.slug)
     .single();
   if (!project) return {};
   return {
@@ -27,8 +24,9 @@ export async function generateMetadata({ params }: ProjectPageProps): Promise<Me
   };
 }
 
-export default async function ProjectPage({ params }: ProjectPageProps) {
+export default async function ProjectPage({ params }: { params?: Promise<{ slug: string }> }) {
   const supabase = await createClient();
+  const resolvedParams = params ? await params : { slug: "" };
   // 프로젝트 + 사용 기술 이름 배열(조인)
   const { data: project, error } = await supabase
     .from("projects")
@@ -45,7 +43,7 @@ export default async function ProjectPage({ params }: ProjectPageProps) {
       github_repo_url,
       project_tech_links(tech_stack(name))
     `)
-    .eq("slug", params.slug)
+    .eq("slug", resolvedParams.slug)
     .single();
 
   if (!project || error) {
@@ -54,8 +52,8 @@ export default async function ProjectPage({ params }: ProjectPageProps) {
 
   // tech_names 배열 생성
   const tech_names = (project.project_tech_links || [])
-    .map((link: any) => link.tech_stack?.name)
-    .filter(Boolean);
+    .map((link) => (link as { tech_stack?: { name?: string } }).tech_stack?.name)
+    .filter((name): name is string => Boolean(name));
 
   const projectDetail: ProjectDetail = {
     ...project,

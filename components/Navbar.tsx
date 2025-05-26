@@ -27,7 +27,7 @@ const Navbar: React.FC = () => {
   return (
     <nav className="border-b px-4 py-3 flex items-center justify-between w-full">
       <Link href="/" className="font-bold text-xl tracking-tight hover:opacity-80 transition-opacity">
-        JISUB's Portfolio
+        JISUB&apos;s Portfolio
       </Link>
       <div className="flex items-center gap-2">
         {/* Desktop nav */}

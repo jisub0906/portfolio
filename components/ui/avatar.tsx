@@ -2,9 +2,7 @@ import * as React from "react";
 
 import { cn } from "@/lib/utils";
 
-export interface AvatarProps extends React.HTMLAttributes<HTMLSpanElement> {}
-
-const Avatar = React.forwardRef<HTMLSpanElement, AvatarProps>(({ className, ...props }, ref) => {
+const Avatar = React.forwardRef<HTMLSpanElement, React.HTMLAttributes<HTMLSpanElement>>(({ className, ...props }, ref) => {
   return (
     <span
       ref={ref}
@@ -21,11 +19,14 @@ Avatar.displayName = "Avatar";
 const AvatarImage = React.forwardRef<
   HTMLImageElement,
   React.ImgHTMLAttributes<HTMLImageElement>
->(({ className, ...props }, ref) => {
+>(({ className, alt = "Avatar image", ...props }, ref) => {
   return (
+    // next/image로 교체하려면 아래 주석을 참고하세요.
+    // <Image ref={ref} className={cn("aspect-square h-full w-full", className)} alt={alt} {...props} />
     <img
       ref={ref}
       className={cn("aspect-square h-full w-full", className)}
+      alt={alt}
       {...props}
     />
   );

@@ -57,9 +57,13 @@ export default function ContactForm() {
       setStatus("success");
       setAlert({ type: "success", message: result.message });
       reset();
-    } catch (err: any) {
+    } catch (err: unknown) {
       setStatus("error");
-      setAlert({ type: "error", message: err.message || "알 수 없는 오류가 발생했습니다." });
+      let message = "알 수 없는 오류가 발생했습니다.";
+      if (typeof err === "object" && err !== null && "message" in err && typeof (err as { message?: string }).message === "string") {
+        message = (err as { message: string }).message;
+      }
+      setAlert({ type: "error", message });
     }
   }
 

@@ -35,18 +35,28 @@ const getProjects = async (): Promise<Project[]> => {
     return [];
   }
   // tech_stack: string[]로 변환
-  return (data ?? []).map((project: any) => ({
-    id: project.id,
-    title: project.title,
-    slug: project.slug,
-    summary: project.summary,
-    thumbnail_url: project.thumbnail_url,
-    tech_stack: Array.isArray(project.project_tech_links)
-      ? project.project_tech_links
-          .map((link: any) => link.tech_stack?.name)
-          .filter((name: string | undefined) => !!name)
-      : [],
-  }));
+  return (data ?? []).map((project) => {
+    const p = project as {
+      id: string;
+      title: string;
+      slug: string;
+      summary: string;
+      thumbnail_url: string;
+      project_tech_links?: { tech_stack?: { name?: string } }[];
+    };
+    return {
+      id: p.id,
+      title: p.title,
+      slug: p.slug,
+      summary: p.summary,
+      thumbnail_url: p.thumbnail_url,
+      tech_stack: Array.isArray(p.project_tech_links)
+        ? p.project_tech_links
+            .map((link) => link.tech_stack?.name)
+            .filter((name): name is string => !!name)
+        : [],
+    };
+  });
 };
 
 const getAllTechStackNames = async (): Promise<string[]> => {
@@ -56,7 +66,7 @@ const getAllTechStackNames = async (): Promise<string[]> => {
     .select("name")
     .order("name", { ascending: true });
   if (error) return [];
-  return (data ?? []).map((item: any) => item.name);
+  return (data ?? []).map((item: { name: string }) => item.name);
 };
 
 export default async function ProjectsPage() {
@@ -67,7 +77,7 @@ export default async function ProjectsPage() {
       getProjects(),
       getAllTechStackNames(),
     ]);
-  } catch (e) {
+  } catch {
     projects = [];
     techStackNames = [];
   }
