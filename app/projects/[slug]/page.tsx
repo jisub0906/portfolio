@@ -5,12 +5,16 @@ import { notFound } from "next/navigation";
 import { Metadata } from "next";
 import ProjectDetailClient from "@/components/features/projects/ProjectDetailClient";
 import Icon from "@/components/common/Icon";
-import { createClient } from "@/lib/supabase/server";
+import { createClient, createStaticClient } from "@/lib/supabase/server";
 import { formatDate } from "@/lib/utils";
 
+// 정적 생성 강제
+export const dynamic = 'force-static';
+export const revalidate = 3600; // 1시간마다 재검증
+
 interface ProjectPageProps {
-  params: { slug: string };
-  searchParams?: { [key: string]: string | string[] | undefined };
+  params: Promise<{ slug: string }>;
+  searchParams?: Promise<{ [key: string]: string | string[] | undefined }>;
 }
 
 /**
@@ -18,7 +22,8 @@ interface ProjectPageProps {
  */
 export async function generateStaticParams() {
   try {
-    const supabase = await createClient();
+    // generateStaticParams에서는 createStaticClient 사용
+    const supabase = createStaticClient();
     const { data: projects, error } = await supabase
       .schema("portfolio")
       .from("projects")
@@ -46,12 +51,13 @@ export async function generateMetadata(
   { params }: ProjectPageProps
 ): Promise<Metadata> {
   try {
+    const { slug } = await params;
     const supabase = await createClient();
     const { data: project, error } = await supabase
       .schema("portfolio")
       .from("projects")
       .select("name, summary, main_image_url, slug")
-      .eq("slug", params.slug)
+      .eq("slug", slug)
       .eq("is_published", true)
       .single();
 
@@ -108,12 +114,13 @@ export async function generateMetadata(
  */
 export default async function ProjectDetailPage({ params }: ProjectPageProps) {
   try {
+    const { slug } = await params;
     const supabase = await createClient();
     const { data: project, error } = await supabase
       .schema("portfolio")
       .from("projects")
       .select("*")
-      .eq("slug", params.slug)
+      .eq("slug", slug)
       .eq("is_published", true)
       .single();
 

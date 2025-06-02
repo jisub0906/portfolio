@@ -3,6 +3,9 @@ import HeroSection from "@/components/features/home/HeroSection";
 import FeaturedProjectsSection from "@/components/features/home/FeaturedProjectsSection";
 import RecentBlogPostsSection from "@/components/features/home/RecentBlogPostsSection";
 
+// 동적 렌더링 강제 (Supabase cookies 사용으로 인해)
+export const dynamic = 'force-dynamic';
+
 export const metadata: Metadata = {
   title: "지섭의 포트폴리오 | 풀스택 개발자",
   description: "풀스택 개발자 지섭의 기술, 프로젝트, 그리고 생각을 공유하는 공간입니다. 최신 웹 기술과 다양한 개발 경험을 확인해보세요.",

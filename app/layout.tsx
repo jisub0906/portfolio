@@ -12,6 +12,7 @@ interface RootLayoutProps {
 }
 
 export const metadata: Metadata = {
+  metadataBase: new URL(process.env.NEXT_PUBLIC_SITE_URL || 'https://localhost:3000'),
   title: "지섭의 포트폴리오 (JISUB's Portfolio)",
   description: "다양한 웹사이트 및 애플리케이션 프로젝트들을 전시하고, 기술 역량과 경험을 공유하는 개발자 지섭의 개인 포트폴리오입니다.",
   icons: {

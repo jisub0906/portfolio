@@ -6,6 +6,9 @@ import PageTitle from "@/components/common/PageTitle";
 import { createClient } from "@/lib/supabase/server";
 import { ProjectWithTechStacks, TechStack } from "@/types/supabase_portfolio";
 
+// 동적 렌더링 강제 (cookies 사용으로 인해)
+export const dynamic = 'force-dynamic';
+
 export const metadata: Metadata = {
   title: "프로젝트 | 지섭의 포트폴리오",
   description: "개발자 지섭이 참여하고 만들어온 다양한 웹 및 애플리케이션 프로젝트들을 살펴보세요. 각 프로젝트의 상세 정보와 사용 기술을 확인할 수 있습니다.",

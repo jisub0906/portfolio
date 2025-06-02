@@ -7,6 +7,9 @@ import PageTitle from "@/components/common/PageTitle";
 import TechCategorySection from "@/components/features/techstack/TechCategorySection";
 import { TechStackItemType } from "@/components/features/techstack/TechStackItem";
 
+// 동적 렌더링 강제 (cookies 사용으로 인해)
+export const dynamic = 'force-dynamic';
+
 // 페이지 재검증 주기 설정 (1시간)
 export const revalidate = 3600;
 

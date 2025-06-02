@@ -41,7 +41,7 @@ const Navbar: React.FC = () => {
         {/* 로고/사이트명 */}
         <Link href="/" className="mr-6 flex items-center space-x-2">
           <Icon name="CodeXml" className="h-6 w-6" />
-          <span className="font-bold">JISUB's Portfolio</span>
+          <span className="font-bold">JISUB&apos;s Portfolio</span>
         </Link>
 
         {/* 데스크톱 네비게이션 */}
@@ -93,7 +93,7 @@ const Navbar: React.FC = () => {
                 <SheetHeader>
                   <SheetTitle className="flex items-center space-x-2">
                     <Icon name="CodeXml" className="h-6 w-6" />
-                    <span>JISUB's Portfolio</span>
+                    <span>JISUB&apos;s Portfolio</span>
                   </SheetTitle>
                 </SheetHeader>
                 <div className="mt-6 flex flex-col space-y-3">

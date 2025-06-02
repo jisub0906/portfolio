@@ -30,7 +30,7 @@ const Footer: React.FC = () => {
       <div className="container mx-auto flex flex-col items-center justify-between gap-4 py-8 md:flex-row md:py-10">
         {/* 저작권 텍스트 */}
         <p className="text-center text-sm text-muted-foreground md:text-left">
-          © {currentYear} JISUB's Portfolio. All rights reserved.
+          © {currentYear} JISUB&apos;s Portfolio. All rights reserved.
         </p>
 
         {/* 소셜 링크 영역 */}

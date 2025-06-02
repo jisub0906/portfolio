@@ -5,6 +5,7 @@ import { LucideProps } from "lucide-react";
 import {
   Mail,
   User,
+  UserCircle2,
   Settings,
   Home,
   Search,
@@ -18,6 +19,7 @@ import {
   AlertTriangle,
   HelpCircle,
   CheckCircle,
+  CheckCircle2,
   XCircle,
   Info,
   Menu,
@@ -29,18 +31,32 @@ import {
   Linkedin,
   ArrowRight,
   ArrowLeft,
+  MoveLeft,
+  MoveRight,
   Image,
   ChevronDown,
   Filter,
   SortAsc,
   SortDesc,
   RotateCcw,
-  ExternalLink
+  ExternalLink,
+  Rocket,
+  Lightbulb,
+  Target,
+  Zap,
+  Wrench,
+  Smartphone,
+  Laptop,
+  Twitter,
+  Facebook,
+  Copy,
+  LoaderCircle
 } from "lucide-react";
 
 type IconName = 
   | "Mail"
   | "User"
+  | "UserCircle2"
   | "Settings"
   | "Home"
   | "Search"
@@ -54,6 +70,7 @@ type IconName =
   | "AlertTriangle"
   | "HelpCircle"
   | "CheckCircle"
+  | "CheckCircle2"
   | "XCircle"
   | "Info"
   | "Menu"
@@ -65,13 +82,26 @@ type IconName =
   | "Linkedin"
   | "ArrowRight"
   | "ArrowLeft"
+  | "MoveLeft"
+  | "MoveRight"
   | "Image"
   | "ChevronDown"
   | "Filter"
   | "SortAsc"
   | "SortDesc"
   | "RotateCcw"
-  | "ExternalLink";
+  | "ExternalLink"
+  | "Rocket"
+  | "Lightbulb"
+  | "Target"
+  | "Zap"
+  | "Wrench"
+  | "Smartphone"
+  | "Laptop"
+  | "Twitter"
+  | "Facebook"
+  | "Copy"
+  | "LoaderCircle";
 
 interface IconProps extends Omit<LucideProps, "name"> {
   name: IconName;
@@ -96,6 +126,8 @@ const Icon: FC<IconProps> = ({
         return Mail;
       case "User":
         return User;
+      case "UserCircle2":
+        return UserCircle2;
       case "Settings":
         return Settings;
       case "Home":
@@ -120,6 +152,8 @@ const Icon: FC<IconProps> = ({
         return AlertTriangle;
       case "CheckCircle":
         return CheckCircle;
+      case "CheckCircle2":
+        return CheckCircle2;
       case "XCircle":
         return XCircle;
       case "Info":
@@ -142,6 +176,10 @@ const Icon: FC<IconProps> = ({
         return ArrowRight;
       case "ArrowLeft":
         return ArrowLeft;
+      case "MoveLeft":
+        return MoveLeft;
+      case "MoveRight":
+        return MoveRight;
       case "Image":
         return Image;
       case "ChevronDown":
@@ -156,6 +194,28 @@ const Icon: FC<IconProps> = ({
         return RotateCcw;
       case "ExternalLink":
         return ExternalLink;
+      case "Rocket":
+        return Rocket;
+      case "Lightbulb":
+        return Lightbulb;
+      case "Target":
+        return Target;
+      case "Zap":
+        return Zap;
+      case "Wrench":
+        return Wrench;
+      case "Smartphone":
+        return Smartphone;
+      case "Laptop":
+        return Laptop;
+      case "Twitter":
+        return Twitter;
+      case "Facebook":
+        return Facebook;
+      case "Copy":
+        return Copy;
+      case "LoaderCircle":
+        return LoaderCircle;
       case "HelpCircle":
       default:
         console.warn(`Icon not found: ${String(name)}. Rendering default HelpCircle icon.`);

@@ -1,5 +1,7 @@
 @import "tailwindcss";
 @import "tw-animate-css";
+@import "highlight.js/styles/github.css";
+@import "highlight.js/styles/github-dark.css" layer(dark);
 
 @custom-variant dark (&:is(.dark *));
 
@@ -119,5 +121,91 @@
   }
   body {
     @apply bg-background text-foreground;
+  }
+  
+  /* Code highlighting styles */
+  .hljs {
+    @apply !bg-muted !text-foreground;
+  }
+  
+  /* Dark mode code highlighting */
+  .dark .hljs {
+    @apply !bg-muted !text-foreground;
+  }
+  
+  /* Override specific highlight.js colors to match theme */
+  .hljs-keyword,
+  .hljs-selector-tag,
+  .hljs-literal,
+  .hljs-section,
+  .hljs-link {
+    @apply !text-primary;
+  }
+  
+  .hljs-string {
+    @apply !text-green-600 dark:!text-green-400;
+  }
+  
+  .hljs-comment,
+  .hljs-quote {
+    @apply !text-muted-foreground;
+  }
+  
+  .hljs-number,
+  .hljs-regexp,
+  .hljs-literal {
+    @apply !text-blue-600 dark:!text-blue-400;
+  }
+  
+  /* 이모지 및 특수 문자 개선 */
+  .prose {
+    /* 이모지 크기 및 정렬 개선 */
+    font-variant-emoji: emoji;
+  }
+  
+  .prose p {
+    /* 이모지가 포함된 단락의 줄 높이 개선 */
+    line-height: 1.75;
+  }
+  
+  /* 강조 텍스트 스타일 개선 */
+  .prose strong {
+    font-weight: 700;
+    letter-spacing: -0.025em;
+  }
+  
+  /* 리스트 마커 개선 */
+  .prose ul > li::marker {
+    color: hsl(var(--primary));
+    font-weight: 600;
+  }
+  
+  .prose ol > li::marker {
+    color: hsl(var(--primary));
+    font-weight: 600;
+  }
+  
+  /* 헤딩 개선 */
+  .prose h1,
+  .prose h2,
+  .prose h3 {
+    scroll-margin-top: 6rem;
+  }
+  
+  /* 링크 호버 효과 개선 */
+  .prose a:hover {
+    text-decoration-thickness: 2px;
+    text-underline-offset: 3px;
+  }
+  
+  /* 코드 블록 개선 */
+  .prose pre {
+    font-size: 0.875rem;
+    line-height: 1.5;
+  }
+  
+  .prose code {
+    font-size: 0.875rem;
+    font-weight: 500;
   }
 }

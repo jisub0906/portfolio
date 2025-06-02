@@ -5,7 +5,6 @@
 import { useMemo, useEffect, useState } from "react";
 import DOMPurify from "dompurify";
 import TechStackItem, { TechStackItemType } from "./TechStackItem";
-import { Tables } from "@/types/supabase_portfolio";
 import { cn } from "@/lib/utils";
 
 // TechCategorySection Props 인터페이스 정의
@@ -60,13 +59,13 @@ const TechCategorySection: React.FC<TechCategorySectionProps> = ({
     setIsClient(true);
   }, []);
 
-  // 기술 스택 배열이 비어있으면 렌더링하지 않음
-  if (!techStacks || techStacks.length === 0) {
-    return null;
-  }
-
   // SVG 콘텐츠 살균을 클라이언트에서만 처리
   const sanitizedTechStacks = useMemo(() => {
+    // 기술 스택 배열이 비어있으면 빈 배열 반환
+    if (!techStacks || techStacks.length === 0) {
+      return [];
+    }
+
     if (!isClient) {
       // 서버 사이드에서는 원본 데이터 반환
       return techStacks;
@@ -78,6 +77,11 @@ const TechCategorySection: React.FC<TechCategorySectionProps> = ({
       icon_svg_content: tech.icon_svg_content ? sanitizeSvg(tech.icon_svg_content) : null,
     }));
   }, [techStacks, isClient]);
+
+  // 기술 스택 배열이 비어있으면 렌더링하지 않음
+  if (sanitizedTechStacks.length === 0) {
+    return null;
+  }
 
   // 아이템 크기와 변형에 따른 그리드 클래스 결정
   const getGridClasses = () => {
