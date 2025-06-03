@@ -7,12 +7,12 @@ import Icon from "@/components/common/Icon";
 const socialLinks = [
   {
     name: "GitHub",
-    href: "https://github.com/jisub",
+    href: "https://github.com/jisub0906",
     iconName: "Github" as const,
   },
   {
     name: "LinkedIn",
-    href: "https://linkedin.com/in/jisub",
+    href: "https://www.linkedin.com/in/jisub-lee-283093284/",
     iconName: "Linkedin" as const,
   },
   {
