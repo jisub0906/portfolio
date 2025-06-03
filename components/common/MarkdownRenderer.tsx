@@ -97,11 +97,20 @@ export default function MarkdownRenderer({ content, className }: MarkdownRendere
           },
           // H1 - 메인 제목 (좌측 정렬)
           h1: ({ children, ...props }) => {
-            const id = typeof children === 'string' 
+            const id = typeof children === 'string'
               ? children.toLowerCase().replace(/[^a-z0-9가-힣]/g, '-').replace(/-+/g, '-').replace(/^-|-$/g, '')
               : '';
             return (
-              <h1 id={id} {...props} className="text-left">
+              <h1
+                id={id}
+                {...props}
+                className={cn(
+                  "text-left",
+                  "text-3xl md:text-4xl",
+                  "font-bold",
+                  "mb-8 mt-0 pb-4 border-b border-border/30"
+                )}
+              >
                 {children}
               </h1>
             );
