@@ -53,6 +53,28 @@ export const createApiClient = (request: Request) => {
   );
 };
 
+// 연락처 폼 제출 전용 클라이언트 (서비스 키 사용, RLS 우회)
+export const createContactFormClient = () => {
+  // 서비스 키가 있으면 사용하고, 없으면 익명 키 사용
+  const serviceKey = process.env.SUPABASE_SERVICE_ROLE_KEY;
+  const key = serviceKey || process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!;
+  
+  return createServerClient<Database>(
+    process.env.NEXT_PUBLIC_SUPABASE_URL!,
+    key,
+    {
+      cookies: {
+        getAll() {
+          return [];
+        },
+        setAll() {
+          // 연락처 폼에서는 쿠키 설정 불필요
+        },
+      },
+    },
+  );
+};
+
 // generateStaticParams에서 사용할 수 있는 클라이언트 (cookies 없이)
 export const createStaticClient = () => {
   return createServerClient<Database>(

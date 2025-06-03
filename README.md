@@ -8,7 +8,7 @@
 - **기술 스택 소개**: 보유 기술 및 숙련도 표시
 - **자기소개**: 개발자로서의 여정과 경험 공유
 - **블로그**: 개발, 기술, 생각 등 다양한 주제의 글 작성 및 검색/필터링
-- **연락처**: 문의 폼을 통한 소통 창구
+- **연락처**: 문의 폼을 통한 소통 창구 + **이메일 알림 시스템**
 - **관리자 기능**: 콘텐츠 관리 시스템
 
 ## 🛠 기술 스택
@@ -23,6 +23,10 @@
 ### 백엔드 & 데이터베이스
 - **Supabase** (PostgreSQL, Authentication, Storage, Edge Functions)
 - **Row Level Security (RLS)** 적용
+
+### 이메일 서비스
+- **Brevo** (구 Sendinblue) - 트랜잭션 이메일 발송
+- 관리자 알림 및 자동 응답 이메일 지원
 
 ### 상태 관리 & 폼
 - **Zustand** (전역 상태 관리)
@@ -153,3 +157,51 @@ Supabase PostgreSQL 데이터베이스의 주요 테이블:
 ## 📞 연락처
 
 프로젝트에 대한 문의사항이 있으시면 포트폴리오 웹사이트의 연락처 페이지를 통해 연락해주세요.
+
+## 📧 이메일 알림 시스템
+
+연락처 폼을 통해 문의가 접수되면 자동으로 이메일 알림이 발송됩니다:
+
+### 기능
+- **관리자 알림**: 새로운 문의 접수 시 관리자에게 상세 내용 전송
+- **자동 응답**: 문의자에게 접수 확인 이메일 자동 발송
+- **HTML 템플릿**: 전문적이고 반응형 이메일 디자인
+- **오류 처리**: 이메일 발송 실패 시에도 문의 접수는 정상 처리
+
+### 설정 방법
+
+1. **Brevo 계정 생성** 및 API 키 발급
+2. **발신자 이메일 도메인 인증** (SPF, DKIM 설정)
+3. **환경 변수 설정**:
+
+```env
+# Brevo 이메일 서비스 설정
+BREVO_API_KEY=your_brevo_api_key_here
+BREVO_SENDER_EMAIL=your_verified_sender_email@domain.com
+BREVO_SENDER_NAME=JISUB Portfolio
+BREVO_ADMIN_EMAIL=your_admin_email@domain.com
+```
+
+### 이메일 템플릿 미리보기
+
+개발 환경에서 이메일 템플릿을 미리 볼 수 있습니다:
+
+```bash
+# 관리자 알림 이메일 템플릿
+http://localhost:3000/api/email-preview?type=notification
+
+# 자동 응답 이메일 템플릿
+http://localhost:3000/api/email-preview?type=auto-reply
+```
+
+### 이메일 발송 플로우
+
+1. 사용자가 연락처 폼 제출
+2. 서버에서 입력값 유효성 검증 (Zod)
+3. Supabase 데이터베이스에 문의 내용 저장
+4. Brevo API를 통해 이메일 발송 (병렬 처리)
+   - 관리자에게 알림 이메일
+   - 문의자에게 자동 응답 이메일
+5. 사용자에게 성공 메시지 반환
+
+**참고**: 이메일 발송 실패는 전체 문의 접수 프로세스에 영향을 주지 않습니다.

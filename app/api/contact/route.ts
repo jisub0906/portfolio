@@ -2,7 +2,8 @@
 
 import { NextRequest, NextResponse } from "next/server";
 import { contactFormSchema, type ContactFormData } from "@/lib/schemas/contact";
-import { createApiClient } from "@/lib/supabase/server";
+import { createContactFormClient } from "@/lib/supabase/server";
+import { sendContactNotification, sendAutoReplyEmail, type ContactNotificationData } from "@/lib/email/brevo";
 import type { ContactInsert } from "@/types/supabase_portfolio";
 
 export async function POST(request: NextRequest) {
@@ -26,8 +27,8 @@ export async function POST(request: NextRequest) {
 
     const { name, email, subject, message }: ContactFormData = validationResult.data;
 
-    // Supabase 클라이언트 초기화 (API 라우트 전용)
-    const supabase = createApiClient(request);
+    // 연락처 폼 전용 Supabase 클라이언트 초기화
+    const supabase = createContactFormClient();
 
     // contacts 테이블에 데이터 저장
     const contactData: ContactInsert = {
@@ -48,17 +49,51 @@ export async function POST(request: NextRequest) {
       throw new Error('데이터베이스 저장 중 오류가 발생했습니다.');
     }
 
-    // (선택적) 이메일 알림 로직 - 향후 구현 예정
-    // TODO: Implement email notification to admin (e.g., using Resend)
-    console.log('새로운 문의 접수:', {
+    // 이메일 알림 데이터 준비
+    const emailData: ContactNotificationData = {
       name,
       email,
-      subject: subject || "제목 없음",
-      message: message.substring(0, 100) + (message.length > 100 ? "..." : ""),
+      subject: subject || undefined,
+      message,
       timestamp: new Date().toISOString(),
-    });
+    };
 
-    // 성공 응답 반환
+    // 이메일 알림 발송 (병렬 처리)
+    const emailPromises = [];
+    
+    // 1. 관리자에게 알림 이메일 발송
+    if (process.env.BREVO_API_KEY && process.env.BREVO_ADMIN_EMAIL) {
+      emailPromises.push(
+        sendContactNotification(emailData).catch((error) => {
+          console.error('관리자 알림 이메일 발송 실패:', error);
+          // 이메일 발송 실패가 전체 프로세스를 중단시키지 않도록 함
+        })
+      );
+    }
+
+    // 2. 문의자에게 자동 응답 이메일 발송
+    if (process.env.BREVO_API_KEY && process.env.BREVO_SENDER_EMAIL) {
+      emailPromises.push(
+        sendAutoReplyEmail(emailData).catch((error) => {
+          console.error('자동 응답 이메일 발송 실패:', error);
+          // 이메일 발송 실패가 전체 프로세스를 중단시키지 않도록 함
+        })
+      );
+    }
+
+    // 이메일 발송 처리 (비동기, 응답 지연 방지)
+    if (emailPromises.length > 0) {
+      Promise.allSettled(emailPromises).then((results) => {
+        const successCount = results.filter(result => result.status === 'fulfilled').length;
+        const failureCount = results.filter(result => result.status === 'rejected').length;
+        
+        console.log(`이메일 발송 완료: 성공 ${successCount}건, 실패 ${failureCount}건`);
+      });
+    } else {
+      console.warn('Brevo 환경 변수가 설정되지 않아 이메일 알림을 건너뜁니다.');
+    }
+
+    // 성공 응답 반환 (이메일 발송 결과와 무관하게)
     return NextResponse.json(
       {
         success: true,

@@ -15,21 +15,21 @@ interface ContactItem {
 const contactItems: ContactItem[] = [
   {
     name: "Email",
-    value: "jisub.portfolio@example.com",
+    value: "jisub0906@gmail.com",
     iconName: "Mail",
     type: "email",
     ariaLabel: "이메일 보내기",
   },
   {
     name: "LinkedIn",
-    value: "https://www.linkedin.com/in/jisubdev",
+    value: "https://www.linkedin.com/in/jisub-lee-283093284/",
     iconName: "Linkedin",
     type: "link",
     ariaLabel: "LinkedIn 프로필 방문 (새 창)",
   },
   {
     name: "GitHub",
-    value: "https://github.com/jisubkim",
+    value: "https://github.com/jisub0906",
     iconName: "Github",
     type: "link",
     ariaLabel: "GitHub 프로필 방문 (새 창)",
